@@ -14,3 +14,10 @@ module "vm_instance" {
   image_family   = "debian-11"
   image_project  = "debian-cloud"
 }
+
+module "gcs_bucket" {
+  source        = "./modules/gcs_bucket"
+  bucket_name   = "murali-test-devops"
+  location      = var.region
+  storage_class = "STANDARD"
+}

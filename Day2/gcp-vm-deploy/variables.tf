@@ -1,11 +1,16 @@
 variable "project_id" {
-  default = "careful-relic-456115-n9"
+  description = "GCP project ID"
+  type        = string
 }
 
 variable "region" {
-  default = "asia-south1"
+  description = "GCP region"
+  type        = string
+  default     = "asia-south1"
 }
 
 variable "zone" {
-  default = "asia-south1-a"
+  description = "GCP zone"
+  type        = string
+  default     = "asia-south1-a"
 }
