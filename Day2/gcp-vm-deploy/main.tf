@@ -7,7 +7,7 @@ provider "google" {
 
 module "vm_instance" {
   source         = "./modules/compute_instance"
-  instance_name  = "my-instance"
+  instance_name  = "my-instance1"
   machine_type   = "e2-medium"
   zone           = var.zone
   project_id     = var.project_id
@@ -17,7 +17,7 @@ module "vm_instance" {
 
 module "gcs_bucket" {
   source        = "./modules/gcs_bucket"
-  bucket_name   = "murali-test-devops"
+  bucket_name   = "murali-test-devops2"
   location      = var.region
   storage_class = "STANDARD"
 }
