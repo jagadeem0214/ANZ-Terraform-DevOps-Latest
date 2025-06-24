@@ -7,7 +7,7 @@ variable "credentials_file" {
 variable "project_id" {
   description = "GCP Project ID"
   type        = string
-  default     = "careful-relic-456115"
+  default     = "careful-relic-456115-n9"
 }
 
 variable "region" {
