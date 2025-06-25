@@ -1,0 +1,7 @@
+instance_name  = "dev-vm"
+machine_type   = "e2-medium"
+zone           = "asia-south1-a"
+region         = "asia-south1"
+project_id     = "careful-relic-456115-n9"
+image_family   = "debian-11"
+image_project  = "debian-cloud"
