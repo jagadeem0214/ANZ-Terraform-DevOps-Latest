@@ -1,0 +1,61 @@
+name: Terraform GCP GKE Deploy
+
+on:
+  push:
+    branches:
+      - master    # ✅ changed from main to master
+
+jobs:
+  terraform:
+    name: Terraform Init, Plan, Apply
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: gke-cluster   # ✅ directory where .tf files are
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Decode GCP credentials
+        run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 --decode > "${HOME}/gcp-key.json"
+
+      - name: Set GOOGLE_APPLICATION_CREDENTIALS
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp-key.json" >> $GITHUB_ENV
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+
+      # ✅ Security & Compliance Check
+      - name: Run Terrascan for Security & Compliance
+        uses: accurics/terrascan-action@v1.3.0
+        with:
+          iac_type: "terraform"
+          iac_version: "v14"
+          policy_type: "gcp"
+          iac_dir: "gke-cluster"
+
+      # ⚠️ Optional Auto Apply (on master only)
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master'
+        run: terraform apply -input=false -auto-approve

@@ -1,0 +1,2 @@
+cat C:/Users/mural/Documents/gcp-terraform-key.json | base64
+terraform fmt -recursive
