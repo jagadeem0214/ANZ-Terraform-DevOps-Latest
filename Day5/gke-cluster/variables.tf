@@ -14,7 +14,7 @@ variable "location" {
 
 variable "cluster_name" {
   type    = string
-  default = "my-gke-cluster"
+  default = "jagadeem-gke-cluster"
 }
 
 variable "initial_node_count" {
