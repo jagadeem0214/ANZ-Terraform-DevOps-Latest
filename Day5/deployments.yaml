@@ -1,0 +1,26 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: flower-app-deployment 
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      web: app
+  template: 
+    metadata: 
+      labels:
+        web: app 
+    spec: 
+      containers:
+        - name: flower-cont 
+          image: muralisocial123/flower-app-cap:1.0
+          resources: 
+            requests:
+              cpu: "50m"
+              memory: "150Mi"
+            limits:
+              cpu: "100m"
+              memory: "200Mi"  
+          ports:
+            - containerPort: 3015
