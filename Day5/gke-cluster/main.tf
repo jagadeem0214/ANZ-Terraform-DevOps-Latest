@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("C:/Users/mural/Documents/gcp-terraform-key.json") # Update path as needed
+  credentials = file("C:/Users/Administrator/Desktop/Terraform/gcp-terraform-key.json") # Update path as needed
   project = var.project_id
   region  = var.region
   zone        = "asia-south1-a"
